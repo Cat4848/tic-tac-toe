@@ -83,6 +83,8 @@ INSERT INTO players (name) VALUES ('Catalin');
 
 ## Demo
 
+<a href="https://drive.google.com/file/d/1qoQe1PemifEi0K1FgWrQc6hLb3ECAOH6/view?usp=sharing" target="_blank">demo</a>
+
 I have a one minute [screen-recording](https://drive.google.com/file/d/1qoQe1PemifEi0K1FgWrQc6hLb3ECAOH6/view?usp=sharing) just in case you want to see it running on my machine.
 
 ## Testing the application
