@@ -1,11 +1,24 @@
+import { ValidationError } from "yup";
 import { editScorePayloadValidation } from "../validateEditScore";
 
-test('if it passes with correct payload', async () => {
-  expect.assertions(1)
+test("if it passes with correct payload", async () => {
+  expect.assertions(1);
   const reqBody = {
     player_id: 1,
     score: 1
+  };
+  const mockWrapper = jest.fn(
+    async () => await editScorePayloadValidation(reqBody)
+  );
+  expect(mockWrapper).not.toThrow();
+});
+
+test("if it fails with empty payload", async () => {
+  expect.assertions(1);
+  const reqBody = {};
+  try {
+    await editScorePayloadValidation(reqBody);
+  } catch (e) {
+    expect(e).toBeInstanceOf(ValidationError);
   }
-  const mockWrapper = jest.fn(async () => await editScorePayloadValidation(reqBody))
-  expect(mockWrapper).not.toThrow()
-})
+});
