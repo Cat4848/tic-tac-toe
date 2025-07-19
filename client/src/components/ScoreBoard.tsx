@@ -1,5 +1,5 @@
 import React from "react";
-import { Player } from "../lib/types";
+import { Player } from "../types";
 
 interface Props {
   players: Player[];

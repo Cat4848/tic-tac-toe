@@ -1,5 +1,5 @@
 import React from "react";
-import { SquareValue } from "../lib/types";
+import { SquareValue } from "../types";
 import { v4 as uuid } from "uuid";
 
 interface Props {

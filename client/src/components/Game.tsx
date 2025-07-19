@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Player, SquareValue } from "../lib/types";
+import { Player, SquareValue } from "../types";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
 import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
@@ -22,8 +22,8 @@ const Game = () => {
   const activePlayer = players[playerIndex];
 
   useEffect(() => {
-    const itWon = isWinner();
-    if (itWon) {
+    const playerWon = isWinner();
+    if (playerWon) {
       const winningPlayer = players[(moveNo - 1) % 2];
       editScore(winningPlayer);
       updatePlayers(winningPlayer);
@@ -33,6 +33,17 @@ const Game = () => {
       }, 1500);
     }
   }, [moveNo]);
+
+  const isWinner = () => {
+    const isRowsWinner = isWinnerOnRows(board);
+    if (isRowsWinner) return true;
+    const flippedBoard = flipBoard(board);
+    const isColumnsWinner = isWinnerOnRows(flippedBoard);
+    if (isColumnsWinner) return true;
+    const isDiagWinner = isWinnerOnDiag(board);
+    if (isDiagWinner) return true;
+    return false;
+  };
 
   const editScore = async (player: Player) => {
     try {
@@ -74,15 +85,11 @@ const Game = () => {
     setPlayers(newPlayers);
   };
 
-  const isWinner = () => {
-    const isRowsWinner = isWinnerOnRows(board);
-    if (isRowsWinner) return true;
-    const flippedBoard = flipBoard(board);
-    const isColumnsWinner = isWinnerOnRows(flippedBoard);
-    if (isColumnsWinner) return true;
-    const isDiagWinner = isWinnerOnDiag(board);
-    if (isDiagWinner) return true;
-    return false;
+  const handleSelectBoardSize = (size: string) => {
+    const sizeNo = Number(size);
+    setBoardSize(sizeNo);
+    setBoard(buildBoard(sizeNo));
+    setIsBoardSizeSelected(true);
   };
 
   const handleClick = (rowNo: number, squareNo: number) => {
@@ -104,13 +111,6 @@ const Game = () => {
         });
       });
     });
-  };
-
-  const handleSelectBoardSize = (size: string) => {
-    const sizeNo = Number(size);
-    setBoardSize(sizeNo);
-    setBoard(buildBoard(sizeNo));
-    setIsBoardSizeSelected(true);
   };
 
   return (

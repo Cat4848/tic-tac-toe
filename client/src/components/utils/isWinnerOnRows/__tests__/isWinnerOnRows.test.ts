@@ -1,4 +1,4 @@
-import { SquareValue } from "../../../../lib/types";
+import { SquareValue } from "../../../../types";
 import isWinnerOnRows from "../isWinnerOnRows";
 
 test("if it validates rows correctly on a winning 3X3 board", () => {

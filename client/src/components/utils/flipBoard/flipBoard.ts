@@ -1,5 +1,5 @@
 import { deepCopy } from "../general/general";
-import { SquareValue } from "../../../lib/types";
+import { SquareValue } from "../../../types";
 
 const flipBoard = (board: SquareValue[][]) => {
   const columns = deepCopy(board);

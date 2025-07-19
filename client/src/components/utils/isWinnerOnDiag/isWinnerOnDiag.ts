@@ -1,5 +1,5 @@
 import { deepCopy } from "../general/general";
-import { SquareValue } from "../../../lib/types";
+import { SquareValue } from "../../../types";
 import isWinnerOnRow from "../isWinnerOnRow/isWinnerOnRow";
 
 export const isWinnerOnDiag = (board: SquareValue[][]) => {
