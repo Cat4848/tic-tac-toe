@@ -9,6 +9,7 @@ const SelectBoardSize = ({ onSelectBoardSize }: Props) => {
 
   return (
     <select
+      name="select-board-size"
       className="p-3 border-2 rounded-md border-indigo-600"
       onChange={(e) => onSelectBoardSize(e.target.value)}
     >
