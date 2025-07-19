@@ -4,6 +4,7 @@ import { v4 as uuid } from "uuid";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
 import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
+import { toast } from "react-toastify";
 
 const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>([
@@ -15,9 +16,17 @@ const Game = () => {
   const isXNext = moveNo % 2 === 0;
 
   useEffect(() => {
-    const isWinning = isWinner();
-    console.log("board", board);
-    console.log("isWinning", isWinning);
+    const itWon = isWinner();
+    if (itWon) {
+      toast.success("You won!");
+      setTimeout(() => {
+        setBoard([
+          [undefined, undefined, undefined],
+          [undefined, undefined, undefined],
+          [undefined, undefined, undefined]
+        ]);
+      }, 1500);
+    }
   }, [moveNo]);
 
   const isWinner = () => {
