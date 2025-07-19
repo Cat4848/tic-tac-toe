@@ -22,3 +22,13 @@ test("if it fails with empty payload", async () => {
     expect(e).toBeInstanceOf(ValidationError);
   }
 });
+
+test("if it fails with missing score prop", async () => {
+  expect.assertions(1);
+  const reqBody = { player_id: 1 };
+  try {
+    await editScorePayloadValidation(reqBody);
+  } catch (e) {
+    expect(e).toBeInstanceOf(ValidationError);
+  }
+});
