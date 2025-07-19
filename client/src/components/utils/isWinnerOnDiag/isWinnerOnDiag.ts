@@ -1,11 +1,13 @@
+import { deepCopy } from "..";
 import { SquareValue } from "../../../lib/types";
 import isWinnerOnRow from "../isWinnerOnRow/isWinnerOnRow";
 
 export const isWinnerOnDiag = (board: SquareValue[][]) => {
-  const diagLeftToRight = getDiagLeftToRight(board);
+  const deepBoard = deepCopy(board);
+  const diagLeftToRight = getDiagLeftToRight(deepBoard);
   const isWinnerOnDiagLeftToRight = isWinnerOnRow(diagLeftToRight);
   if (isWinnerOnDiagLeftToRight) return true;
-  const diagRightToLeft = getDiagRightToLeft(board);
+  const diagRightToLeft = getDiagRightToLeft(deepBoard);
   const isWinnerOnDiagRightToLeft = isWinnerOnRow(diagRightToLeft);
   if (isWinnerOnDiagRightToLeft) return true;
   return false;
