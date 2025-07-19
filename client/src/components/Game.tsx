@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
+import flipBoard from "./utils/flipBoard/flipBoard";
 
 const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>([
@@ -11,6 +12,19 @@ const Game = () => {
   ]);
   const [moveNo, setMoveNo] = useState(0);
   const isXNext = moveNo % 2 === 0;
+
+  useEffect(() => {
+    const isWinning = isWinner();
+  }, [moveNo]);
+
+  const isWinner = () => {
+    const isRowsWinner = isWinnerOnRows(board);
+    if (isRowsWinner) return true;
+    const flippedBoard = flipBoard(board);
+    const isColumnsWinner = isWinnerOnRows(flippedBoard);
+    if (isColumnsWinner) return true;
+    return false;
+  };
 
   const handleClick = (rowNo: number, squareNo: number) => {
     setBoard((board) => {
@@ -31,10 +45,6 @@ const Game = () => {
         });
       });
     });
-  };
-
-  const isWinner = () => {
-    const isRowsWinner = isWinnerOnRows(board);
   };
 
   return (
