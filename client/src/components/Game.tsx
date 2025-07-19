@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
-import isWinnerOnRow from "./utils/isWinnerOnRow/isWinnerOnRow";
+import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 
 const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>([
@@ -33,7 +33,9 @@ const Game = () => {
     });
   };
 
-  const isWinner = () => {};
+  const isWinner = () => {
+    const isRowsWinner = isWinnerOnRows(board);
+  };
 
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
