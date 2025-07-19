@@ -50,14 +50,22 @@ Simplification for the task:
 - before a new game starts the option for the players to chose if they want to use X or O;
 - players to chose which one begins first on a new game
 - a more sophisticated way to keep track of who won; at the moment when a player wins, I use a ternary operator to establish the winner;
+- now we only have 2 players: Nick and Catalin; if we would have more players in the database, I will ask the players to select who they are from the list of all players. When I know who will play, I create an array with just those 2 players and use the same `moveNo % 2` logic to circulate between the players's turns;
 
 ## Testing
+
+- mock the `PlayersTable` service so that I won't interact with the database directly;
 
 ## Bugs
 
 - after a win, there are 1.5 seconds until time delay until the board gets reinitialized. If you fill the board on two side-by-side rows or columns, one will win and the other one will be one move behind from winning. If you click on the remaining square, both players will win.
 
 - more testing on the diagonal extraction (i.e. on a 5x5 board and combine left to right and right to left diagonal extraction logic);
+
+## Development
+
+- a shared types package between frontend and backend to enhance DRY code;
+- loading state for async operations like fetch users or post user's score;
 
 ## Things to write about in the README.md file
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SquareValue } from "../lib/types";
+import { Player, SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
@@ -7,24 +7,71 @@ import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
 import { toast } from "react-toastify";
 import { buildBoard } from "./utils/general/general";
 import SelectBoardSize from "./SelectBoardSize";
+import { usePlayers } from "../hooks/usePlayers";
 
 const Game = () => {
+  const fetchAllPlayersUrl = "/players";
+  const { players, setPlayers } = usePlayers(fetchAllPlayersUrl);
   const [isBoardSizeSelected, setIsBoardSizeSelected] = useState(false);
   const [boardSize, setBoardSize] = useState<number>(3);
   const [board, setBoard] = useState<SquareValue[][]>(buildBoard(boardSize));
   const [moveNo, setMoveNo] = useState(0);
-  const isXNext = moveNo % 2 === 0;
-  const player = `${isXNext ? "Nick" : "Catalin"}`;
+  const playerIndex = moveNo % 2;
+  const isXNext = playerIndex === 0;
+  const player = players[playerIndex];
 
   useEffect(() => {
     const itWon = isWinner();
     if (itWon) {
-      toast.success("You won!");
+      const winningPlayer = players[(moveNo - 1) % 2];
+      editScore(winningPlayer);
+      updatePlayers(winningPlayer);
+      toast.success(`${winningPlayer.name} wins! 🥳🤩`);
       setTimeout(() => {
         setBoard(buildBoard(boardSize));
       }, 1500);
     }
   }, [moveNo]);
+
+  const editScore = async (player: Player) => {
+    try {
+      const res = await fetch("/players/editScore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          player_id: player.player_id,
+          score: player.score + 1
+        })
+      });
+      if (!res.ok) {
+        const errorMessage = await res.text();
+        toast.error(errorMessage);
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      } else {
+        toast.error(e);
+      }
+    }
+  };
+
+  const updatePlayers = (winningPlayer: Player) => {
+    const newPlayers = players.map((player) => {
+      if (player.player_id === winningPlayer.player_id) {
+        const updatedPlayer: Player = {
+          ...player,
+          score: player.score + 1
+        };
+        return updatedPlayer;
+      } else {
+        return player;
+      }
+    });
+    setPlayers(newPlayers);
+  };
 
   const isWinner = () => {
     const isRowsWinner = isWinnerOnRows(board);
@@ -61,16 +108,19 @@ const Game = () => {
   const handleSelectBoardSize = (size: string) => {
     const sizeNo = Number(size);
     setBoardSize(sizeNo);
-    setIsBoardSizeSelected(true);
     setBoard(buildBoard(sizeNo));
+    setIsBoardSizeSelected(true);
   };
 
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
-      <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
+      <div className="flex mt-10 items-center justify-evenly w-full gap-10">
+        <div>Score Board</div>
+        <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
+      </div>
       {isBoardSizeSelected && (
-        <div className="font-bold text-2xl">{`It's ${player}'s turn 🕣`}</div>
+        <div className="font-bold text-2xl">{`It's ${player.name}'s turn 🕣`}</div>
       )}
       <div className="flex flex-col gap-1 mt-2">
         {isBoardSizeSelected &&
