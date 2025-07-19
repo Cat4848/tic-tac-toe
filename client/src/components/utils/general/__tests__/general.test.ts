@@ -22,3 +22,14 @@ test("if the board's row's length is correct", () => {
     expect(row.length).toBe(size);
   }
 });
+
+test("if the board's square's value is undefined", () => {
+  const size = 5;
+  expect.assertions(size * size);
+  const board = buildBoard(size);
+  for (const row of board) {
+    for (const square of row) {
+      expect(square).toBe(undefined);
+    }
+  }
+});
