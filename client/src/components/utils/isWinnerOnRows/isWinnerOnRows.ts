@@ -8,5 +8,6 @@ const isWinnerOnRows = (board: SquareValue[][]) => {
       return true;
     }
   }
+  return false;
 };
 export default isWinnerOnRows;
