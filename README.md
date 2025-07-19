@@ -56,7 +56,7 @@ DB_URL=mysql://[your-user-name]:[your-password]@localhost:3306/tic_tac_toe_game
 SESSION_SECRET=4b0d432e400f09573de6c96b916ac6a3ae0ca6c3cfd83cb370b0152fc54dd845fc233b6381238e0981f1df97d189690c6dbc0afad59e5c46ed575cc64bf009dc
 ```
 
-- paste the following SQL code into your **Database Client** of choice
+- paste the following SQL code into your **Database Client** of choice:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS tic_tac_toe_game;
@@ -80,6 +80,10 @@ INSERT INTO players (name) VALUES ('Catalin');
 - `npm run start`
 - [start-app](http://localhost:4000/) in your browser
 - enjoy playing 😀
+
+## Demo
+
+I have a one minute [screen-recording](https://drive.google.com/file/d/1qoQe1PemifEi0K1FgWrQc6hLb3ECAOH6/view?usp=sharing) just in case you want to see it running on my machine.
 
 ## Testing the application
 
