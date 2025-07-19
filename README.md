@@ -50,6 +50,7 @@ Simplification for the task:
 - before a new game starts the option for the players to chose if they want to use X or O;
 - players to chose which one begins first on a new game
 - a more sophisticated way to keep track of who won; at the moment when a player wins, I use a ternary operator to establish the winner;
+- now we only have 2 players: Nick and Catalin; if we would have more players in the database, I will ask the players to select who they are from the list of all players. When I know who will play, I create an array with just those 2 players and use the same `moveNo % 2` logic to circulate between the players's turns;
 
 ## Testing
 

@@ -10,20 +10,21 @@ import SelectBoardSize from "./SelectBoardSize";
 import { usePlayers } from "../hooks/usePlayers";
 
 const Game = () => {
+  const fetchAllPlayersUrl = "/players";
+  const players = usePlayers(fetchAllPlayersUrl);
   const [isBoardSizeSelected, setIsBoardSizeSelected] = useState(false);
   const [boardSize, setBoardSize] = useState<number>(3);
   const [board, setBoard] = useState<SquareValue[][]>(buildBoard(boardSize));
   const [moveNo, setMoveNo] = useState(0);
-  const isXNext = moveNo % 2 === 0;
-  const player = `${isXNext ? "Nick" : "Catalin"}`;
-  const fetchAllPlayersUrl = "/players";
-  const players = usePlayers(fetchAllPlayersUrl);
-  console.log("players", players);
+  const playerIndex = moveNo % 2;
+  const isXNext = playerIndex === 0;
+  const player = players[playerIndex];
 
   useEffect(() => {
     const itWon = isWinner();
     if (itWon) {
-      toast.success("You won!");
+      const winningPlayer = players[(moveNo - 1) % 2];
+      toast.success(`${winningPlayer.name} wins! 🥳🤩`);
       setTimeout(() => {
         setBoard(buildBoard(boardSize));
       }, 1500);
@@ -65,8 +66,8 @@ const Game = () => {
   const handleSelectBoardSize = (size: string) => {
     const sizeNo = Number(size);
     setBoardSize(sizeNo);
-    setIsBoardSizeSelected(true);
     setBoard(buildBoard(sizeNo));
+    setIsBoardSizeSelected(true);
   };
 
   return (
@@ -74,7 +75,7 @@ const Game = () => {
       <div className="font-bold text-2xl">Tic Tac Toe</div>
       <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
       {isBoardSizeSelected && (
-        <div className="font-bold text-2xl">{`It's ${player}'s turn 🕣`}</div>
+        <div className="font-bold text-2xl">{`It's ${player.name}'s turn 🕣`}</div>
       )}
       <div className="flex flex-col gap-1 mt-2">
         {isBoardSizeSelected &&
