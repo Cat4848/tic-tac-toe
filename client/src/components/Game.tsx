@@ -43,18 +43,6 @@ const Game = () => {
     }
   };
 
-  const isRowWinner = (row: SquareValue[]) => {
-    let isWinner = true;
-    const first = row[0];
-    for (let i = 1; i < row.length; i++) {
-      if (row[i] !== first) {
-        isWinner = false;
-        break;
-      }
-    }
-    return isWinner;
-  };
-
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
