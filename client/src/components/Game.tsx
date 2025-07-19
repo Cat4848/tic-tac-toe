@@ -14,6 +14,7 @@ const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>(buildBoard(boardSize));
   const [moveNo, setMoveNo] = useState(0);
   const isXNext = moveNo % 2 === 0;
+  const player = `${isXNext ? "Nick" : "Catalin"}`;
 
   useEffect(() => {
     const itWon = isWinner();
@@ -68,6 +69,7 @@ const Game = () => {
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
       <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
+      <div className="font-bold text-2xl">{`It's ${player}'s turn 🕣`}</div>
       <div className="flex flex-col gap-1 mt-2">
         {isBoardSizeSelected &&
           board.map((row, i) => (

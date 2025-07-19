@@ -49,6 +49,7 @@ Simplification for the task:
 - players' option to add their own name;
 - before a new game starts the option for the players to chose if they want to use X or O;
 - players to chose which one begins first on a new game
+- a more sophisticated way to keep track of who won; at the moment when a player wins, I use a ternary operator to establish the winner;
 
 ## Testing
 
