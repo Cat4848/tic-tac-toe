@@ -49,3 +49,16 @@ Simplification for the task:
 - players' option to add their own name;
 - before a new game starts the option for the players to chose if they want to use X or O;
 - players to chose which one begins first on a new game
+- a more sophisticated way to keep track of who won; at the moment when a player wins, I use a ternary operator to establish the winner;
+
+## Testing
+
+## Bugs
+
+- after a win, there are 1.5 seconds until time delay until the board gets reinitialized. If you fill the board on two side-by-side rows or columns, one will win and the other one will be one move behind from winning. If you click on the remaining square, both players will win.
+
+- more testing on the diagonal extraction (i.e. on a 5x5 board and combine left to right and right to left diagonal extraction logic);
+
+## Things to write about in the README.md file
+
+- that there are tests and how to run them
