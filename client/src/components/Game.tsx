@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SquareValue } from "../lib/types";
+import { Player, SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
@@ -24,12 +24,38 @@ const Game = () => {
     const itWon = isWinner();
     if (itWon) {
       const winningPlayer = players[(moveNo - 1) % 2];
+      editScore(winningPlayer);
       toast.success(`${winningPlayer.name} wins! 🥳🤩`);
       setTimeout(() => {
         setBoard(buildBoard(boardSize));
       }, 1500);
     }
   }, [moveNo]);
+
+  const editScore = async (player: Player) => {
+    try {
+      const res = await fetch("/players/editScore", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          player_id: player.player_id,
+          score: player.score + 1
+        })
+      });
+      if (!res.ok) {
+        const errorMessage = await res.text();
+        toast.error(errorMessage);
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        toast.error(e.message);
+      } else {
+        toast.error(e);
+      }
+    }
+  };
 
   const isWinner = () => {
     const isRowsWinner = isWinnerOnRows(board);
