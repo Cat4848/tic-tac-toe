@@ -130,7 +130,10 @@ const Game = () => {
               {row.map((square, j) => (
                 <div
                   key={uuid()}
-                  className="border-2 border-gray-900 w-10 h-10 cursor-pointer items-center justify-center text-2xl font-bold flex shadow-md shadow-indigo-200 hover:bg-indigo-200"
+                  className={`
+                    border-2 border-gray-900 w-10 h-10 cursor-pointer 
+                    items-center justify-center text-2xl font-bold flex 
+                    shadow-md shadow-indigo-200 hover:bg-indigo-200`}
                   onClick={() => handleClick(i, j)}
                 >
                   {square}
