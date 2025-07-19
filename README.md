@@ -87,7 +87,7 @@ I have a one minute [screen-recording](https://drive.google.com/file/d/1qoQe1Pem
 
 ## Testing the application
 
-I built test for both frontend and backend
+I built tests for both frontend and backend:
 
 - run frontend tests: from the **client** directory run `npm run test`;
 - run backend test: from the **server** directory run `npm run test`.
@@ -95,9 +95,9 @@ I built test for both frontend and backend
 ## Things that I would do if I had more time
 
 - players' option to add their own name;
-- before a new game starts the option for the players to chose if they want to use **X** or **O**;
-- players to chose which one begins first on a new game;
-- now we only have 2 players: **Nick** and **Catalin**; if we would have more players in the database, I will ask the players to select who they are from the list of all players. When I know who will play, I create an array with just those 2 players and use the same `moveNo % 2` logic to circulate between the players's turns.
+- before a new game starts the option for the players to choose if they want to use **X** or **O**;
+- players to choose which one begins first on a new game;
+- now we only have 2 players: **Nick** and **Catalin**; if we would have more players in the database, I will ask the players to select who they are from the list of all players. When I know who will play, I will create an array with just those 2 players and use the same `moveNo % 2` logic to circulate between the players's turns.
 
 ### Testing
 
