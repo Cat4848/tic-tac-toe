@@ -4,7 +4,7 @@ import isWinnerOnRows from "../isWinnerOnRows";
 test("if it validates correctly a winning 3X3 board", () => {
   expect.assertions(1);
   const winningBoard: SquareValue[][] = [
-    ["O", "O", "O"],
+    ["O", "O", "O"], // winning row
     ["O", "O", "X"],
     ["O", "X", "O"]
   ];
@@ -16,7 +16,7 @@ test("if it validates correctly a winning 5X5 board", () => {
   expect.assertions(1);
   const winningBoard: SquareValue[][] = [
     ["O", "O", "O", "X", "X"],
-    ["X", "X", "X", "X", "X"],
+    ["X", "X", "X", "X", "X"], // winning row
     ["O", "O", "O", "X", "X"],
     ["X", "O", "O", "X", "X"],
     ["O", "X", "O", "X", "X"],
