@@ -15,9 +15,23 @@ test("if it validates correctly a winning X row", () => {
   expect(isWinner).toBe(true);
 });
 
-test("if it validates correctly a losing row", () => {
+test("if it validates correctly a losing row 1", () => {
   expect.assertions(1);
   const validValues: SquareValue[] = ["X", "O", "O"];
+  const isWinner = isRowWinner(validValues);
+  expect(isWinner).toBe(false);
+});
+
+test("if it validates correctly a losing row 2", () => {
+  expect.assertions(1);
+  const validValues: SquareValue[] = ["X", "X", "O"];
+  const isWinner = isRowWinner(validValues);
+  expect(isWinner).toBe(false);
+});
+
+test("if it validates correctly a losing row 3", () => {
+  expect.assertions(1);
+  const validValues: SquareValue[] = ["O", "X", "O"];
   const isWinner = isRowWinner(validValues);
   expect(isWinner).toBe(false);
 });
