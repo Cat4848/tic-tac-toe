@@ -8,6 +8,7 @@ module.exports = (env) => ({
   entry: "./src/index.tsx",
   devtool: "source-map",
   output: {
+    publicPath: "/dist",
     filename: "index.js",
     path: path.resolve(__dirname, "../server/src/public/dist")
   },
