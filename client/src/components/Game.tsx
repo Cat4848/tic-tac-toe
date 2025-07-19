@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { buildBoard } from "./utils/general/general";
 import SelectBoardSize from "./SelectBoardSize";
 import { usePlayers } from "../hooks/usePlayers";
+import ScoreBoard from "./ScoreBoard";
 
 const Game = () => {
   const fetchAllPlayersUrl = "/players";
@@ -116,7 +117,7 @@ const Game = () => {
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
       <div className="flex mt-10 items-center justify-evenly w-full gap-10">
-        <div>Score Board</div>
+        <ScoreBoard players={players} />
         <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
       </div>
       {isBoardSizeSelected && (
