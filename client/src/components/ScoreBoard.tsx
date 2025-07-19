@@ -8,7 +8,11 @@ interface Props {
 const ScoreBoard = ({ players }: Props) => {
   const sortedPlayers = players.sort((a, b) => b.score - a.score);
   return (
-    <div className="flex flex-col justify-center items-center gap-4 border-2 border-gray-900 p-4 rounded-md">
+    <div
+      className={`
+        flex flex-col justify-center items-center 
+        gap-4 border-2 border-gray-900 p-4 rounded-md`}
+    >
       <div className="flex justify-between items-center gap-4">
         <div>🍀</div>
         <div className="font-bold text-xl">Leader Board</div>
