@@ -43,3 +43,9 @@ Simplification for the task:
 - `cd client`
 - `npm i`
 - `npm start`
+
+# Things that I would do if I had more time
+
+- players' option to add their own name;
+- before a new game starts the option for the players to chose if they want to use X or O;
+- players to chose which one begins first on a new game
