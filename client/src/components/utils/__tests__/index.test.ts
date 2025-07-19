@@ -36,9 +36,16 @@ test("if it validates correctly a losing row 3", () => {
   expect(isWinner).toBe(false);
 });
 
-test("if it validates correctly invalid values", () => {
+test("if it validates correctly invalid values 1", () => {
   expect.assertions(1);
   const invalidValues: SquareValue[] = [undefined, undefined, undefined];
+  const isWinner = isRowWinner(invalidValues);
+  expect(isWinner).toBe(false);
+});
+
+test("if it validates correctly invalid values 2", () => {
+  expect.assertions(1);
+  const invalidValues: SquareValue[] = ["O", undefined, undefined];
   const isWinner = isRowWinner(invalidValues);
   expect(isWinner).toBe(false);
 });
