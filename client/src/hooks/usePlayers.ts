@@ -12,7 +12,7 @@ export const usePlayers = (url: string) => {
       }
     );
   }, [url]);
-  return players;
+  return { players, setPlayers };
 };
 
 const fetchPlayers = (url: string) => {

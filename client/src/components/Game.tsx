@@ -11,7 +11,7 @@ import { usePlayers } from "../hooks/usePlayers";
 
 const Game = () => {
   const fetchAllPlayersUrl = "/players";
-  const players = usePlayers(fetchAllPlayersUrl);
+  const { players, setPlayers } = usePlayers(fetchAllPlayersUrl);
   const [isBoardSizeSelected, setIsBoardSizeSelected] = useState(false);
   const [boardSize, setBoardSize] = useState<number>(3);
   const [board, setBoard] = useState<SquareValue[][]>(buildBoard(boardSize));
@@ -25,6 +25,7 @@ const Game = () => {
     if (itWon) {
       const winningPlayer = players[(moveNo - 1) % 2];
       editScore(winningPlayer);
+      updatePlayers(winningPlayer);
       toast.success(`${winningPlayer.name} wins! 🥳🤩`);
       setTimeout(() => {
         setBoard(buildBoard(boardSize));
@@ -55,6 +56,21 @@ const Game = () => {
         toast.error(e);
       }
     }
+  };
+
+  const updatePlayers = (winningPlayer: Player) => {
+    const newPlayers = players.map((player) => {
+      if (player.player_id === winningPlayer.player_id) {
+        const updatedPlayer: Player = {
+          ...player,
+          score: player.score + 1
+        };
+        return updatedPlayer;
+      } else {
+        return player;
+      }
+    });
+    setPlayers(newPlayers);
   };
 
   const isWinner = () => {
