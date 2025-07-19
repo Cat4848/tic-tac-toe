@@ -39,3 +39,16 @@ test("if is winner on diagonal on a winning 3x3 board", () => {
   const isWinner = isWinnerOnDiag(board);
   expect(isWinner).toBe(true);
 });
+
+test("if is winner on diagonal on a winning 5x5 board", () => {
+  expect.assertions(1);
+  const board: SquareValue[][] = [
+    ["O", "X", "O", "X", "O"],
+    ["X", "O", "X", "X", "O"],
+    ["O", "X", "O", "X", "O"],
+    ["O", "X", "O", "O", "X"],
+    ["O", "X", "O", "X", "O"]
+  ];
+  const isWinner = isWinnerOnDiag(board);
+  expect(isWinner).toBe(true);
+});
