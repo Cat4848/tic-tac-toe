@@ -5,7 +5,7 @@ export const isWinnerOnDiag = (board: SquareValue[][]) => {
   const diagLeftToRight = getDiagLeftToRight(board);
   const isWinnerOnDiagLeftToRight = isWinnerOnRow(diagLeftToRight);
   if (isWinnerOnDiagLeftToRight) return true;
-  const diagRightToLeft = getDiagLeftToRight(board);
+  const diagRightToLeft = getDiagRightToLeft(board);
   const isWinnerOnDiagRightToLeft = isWinnerOnRow(diagRightToLeft);
   if (isWinnerOnDiagRightToLeft) return true;
   return false;

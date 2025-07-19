@@ -53,3 +53,7 @@ Simplification for the task:
 ## Testing
 
 - more testing on the diagonal extraction (i.e. on a 5x5 board and combine left to right and right to left diagonal extraction logic);
+
+## Things to write about in the README.md file
+
+- that there are tests and how to run them
