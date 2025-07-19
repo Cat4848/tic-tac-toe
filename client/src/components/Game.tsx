@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Player, SquareValue } from "../lib/types";
-import { v4 as uuid } from "uuid";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
 import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
@@ -20,7 +19,7 @@ const Game = () => {
   const [moveNo, setMoveNo] = useState(0);
   const playerIndex = moveNo % 2;
   const isXNext = playerIndex === 0;
-  const player = players[playerIndex];
+  const activePlayer = players[playerIndex];
 
   useEffect(() => {
     const itWon = isWinner();
@@ -122,7 +121,7 @@ const Game = () => {
         <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
       </div>
       {isBoardSizeSelected && (
-        <div className="font-bold text-2xl">{`It's ${player.name}'s turn 🕣`}</div>
+        <div className="font-bold text-2xl">{`It's ${activePlayer.name}'s turn 🕣`}</div>
       )}
       <div className="flex flex-col gap-1 mt-2">
         {isBoardSizeSelected && (
