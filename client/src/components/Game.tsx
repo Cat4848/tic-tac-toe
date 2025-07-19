@@ -34,11 +34,6 @@ const Game = () => {
   };
 
   const isWinner = () => {};
-  const isWinnerOnRows = () => {
-    for (const row of board) {
-      const isWinner = isWinnerOnRow(row);
-    }
-  };
 
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
