@@ -2,6 +2,7 @@ import express from "express";
 import session from "express-session";
 import PlayersTable from "./services/PlayersTable/PlayersTable";
 import db from "./databases/MySqlDatabase";
+import { ValidationError } from "yup";
 
 const app = express();
 
@@ -38,6 +39,22 @@ app.get("/players", async (req, res) => {
       return;
     }
     res.status(500).send(JSON.stringify(e));
+    return;
+  }
+});
+
+app.post("/players/editScore", async (req, res) => {
+  try {
+  } catch (e) {
+    if (e instanceof ValidationError) {
+      res.status(400).send(e.errors[0]);
+      return;
+    }
+    if (e instanceof Error) {
+      res.status(500).send(e.message);
+      return;
+    }
+    res.status(500).send(e);
     return;
   }
 });
