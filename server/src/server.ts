@@ -1,6 +1,8 @@
 import express from "express";
 import session from "express-session";
 import rootLayout from "./lib/layouts/rootLayout";
+import PlayersTable from "./services/PlayersTable/PlayersTable";
+import db from "./databases/MySqlDatabase";
 
 const app = express();
 
@@ -19,6 +21,26 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send(rootLayout("/css/index.css", "/js/index.js"));
+});
+
+app.get("/players", async (req, res) => {
+  try {
+    const playersTable = new PlayersTable(db);
+    const result = await playersTable.getAll();
+    if (result.success) {
+      res.send(result.data);
+      return;
+    } else {
+      throw result.error;
+    }
+  } catch (e) {
+    if (e instanceof Error) {
+      res.status(500).send(e.message);
+      return;
+    }
+    res.status(500).send(JSON.stringify(e));
+    return;
+  }
 });
 
 app.get("*", async (req, res) => {
