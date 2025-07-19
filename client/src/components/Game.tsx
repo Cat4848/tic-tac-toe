@@ -9,13 +9,9 @@ import { buildBoard } from "./utils/general/general";
 import SelectBoardSize from "./SelectBoardSize";
 
 const Game = () => {
-  const [boardSize, setBoardSize] = useState(3);
-
-  const [board, setBoard] = useState<SquareValue[][]>([
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined]
-  ]);
+  const [isBoardSizeSelected, setIsBoardSizeSelected] = useState(false);
+  const [boardSize, setBoardSize] = useState<number>(3);
+  const [board, setBoard] = useState<SquareValue[][]>(buildBoard(boardSize));
   const [moveNo, setMoveNo] = useState(0);
   const isXNext = moveNo % 2 === 0;
 
@@ -65,24 +61,32 @@ const Game = () => {
     });
   };
 
+  const handleSelectBoardSize = (size: string) => {
+    const sizeNo = Number(size);
+    setBoardSize(sizeNo);
+    setIsBoardSizeSelected(true);
+    setBoard(buildBoard(sizeNo));
+  };
+
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
       <div className="flex flex-col gap-1">
-        <SelectBoardSize />
-        {/* {board.map((row, i) => (
-          <div key={uuid()} className="flex gap-1">
-            {row.map((square, j) => (
-              <div
-                key={uuid()}
-                className="border-2 border-gray-900 w-10 h-10 cursor-pointer items-center justify-center text-2xl font-bold flex"
-                onClick={() => handleClick(i, j)}
-              >
-                {square}
-              </div>
-            ))}
-          </div>
-        ))} */}
+        <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
+        {isBoardSizeSelected &&
+          board.map((row, i) => (
+            <div key={uuid()} className="flex gap-1">
+              {row.map((square, j) => (
+                <div
+                  key={uuid()}
+                  className="border-2 border-gray-900 w-10 h-10 cursor-pointer items-center justify-center text-2xl font-bold flex"
+                  onClick={() => handleClick(i, j)}
+                >
+                  {square}
+                </div>
+              ))}
+            </div>
+          ))}
       </div>
     </div>
   );
