@@ -53,6 +53,8 @@ Simplification for the task:
 
 ## Testing
 
+- mock the `PlayersTable` service so that I won't interact with the database directly;
+
 ## Bugs
 
 - after a win, there are 1.5 seconds until time delay until the board gets reinitialized. If you fill the board on two side-by-side rows or columns, one will win and the other one will be one move behind from winning. If you click on the remaining square, both players will win.
