@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
+import { isWinnerOnRow } from "./utils";
 
 const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>([
@@ -33,13 +34,9 @@ const Game = () => {
   };
 
   const isWinner = () => {};
-  const checkRows = () => {
+  const isWinnerOnRows = () => {
     for (const row of board) {
-      for (const square of row) {
-        if (square !== undefined) {
-          square;
-        }
-      }
+      const isWinner = isWinnerOnRow(row);
     }
   };
 

@@ -1,6 +1,6 @@
 import { SquareValue } from "../../lib/types";
 
-export const isRowWinner = (row: SquareValue[]) => {
+export const isWinnerOnRow = (row: SquareValue[]) => {
   const first = row[0];
   if (!first) return false; // handle undefined values
   let isWinner = true;
