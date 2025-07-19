@@ -32,3 +32,13 @@ test("if it fails with missing score prop", async () => {
     expect(e).toBeInstanceOf(ValidationError);
   }
 });
+
+test("if it fails with missing player_id prop", async () => {
+  expect.assertions(1);
+  const reqBody = { score: 1 };
+  try {
+    await editScorePayloadValidation(reqBody);
+  } catch (e) {
+    expect(e).toBeInstanceOf(ValidationError);
+  }
+});
