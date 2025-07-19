@@ -20,11 +20,7 @@ const Game = () => {
     if (itWon) {
       toast.success("You won!");
       setTimeout(() => {
-        setBoard([
-          [undefined, undefined, undefined],
-          [undefined, undefined, undefined],
-          [undefined, undefined, undefined]
-        ]);
+        setBoard(buildBoard(boardSize));
       }, 1500);
     }
   }, [moveNo]);
