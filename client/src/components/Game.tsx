@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { SquareValue } from "./types";
+import { SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
 
-export const Main = () => {
+const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>([
     [undefined, undefined, undefined],
     [undefined, undefined, undefined],
@@ -32,6 +32,29 @@ export const Main = () => {
     });
   };
 
+  const isWinner = () => {};
+  const checkRows = () => {
+    for (const row of board) {
+      for (const square of row) {
+        if (square !== undefined) {
+          square;
+        }
+      }
+    }
+  };
+
+  const isRowWinner = (row: SquareValue[]) => {
+    let isWinner = true;
+    const first = row[0];
+    for (let i = 1; i < row.length; i++) {
+      if (row[i] !== first) {
+        isWinner = false;
+        break;
+      }
+    }
+    return isWinner;
+  };
+
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
@@ -53,3 +76,5 @@ export const Main = () => {
     </div>
   );
 };
+
+export default Game;

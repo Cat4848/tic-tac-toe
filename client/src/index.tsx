@@ -1,8 +1,7 @@
-import React from 'react'
-import { createRoot } from 'react-dom/client'
-import './assets/index'
-import { Main } from './main'
+import React from "react";
+import { createRoot } from "react-dom/client";
+import "./assets/index";
+import Game from "./components/Game";
 
-
-const root = createRoot(document.getElementById('root')!)
-root.render(<Main />)
+const root = createRoot(document.getElementById("root")!);
+root.render(<Game />);
