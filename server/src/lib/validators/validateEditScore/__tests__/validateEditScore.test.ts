@@ -62,3 +62,13 @@ test("if it fails with wrong score prop type", async () => {
     expect(e).toBeInstanceOf(ValidationError);
   }
 });
+
+test("if it fails with wrong player_id and score props type", async () => {
+  expect.assertions(1);
+  const reqBody = { player_id: false, score: new Map() };
+  try {
+    await editScorePayloadValidation(reqBody);
+  } catch (e) {
+    expect(e).toBeInstanceOf(ValidationError);
+  }
+});
