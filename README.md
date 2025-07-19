@@ -49,3 +49,7 @@ Simplification for the task:
 - players' option to add their own name;
 - before a new game starts the option for the players to chose if they want to use X or O;
 - players to chose which one begins first on a new game
+
+## Testing
+
+- more testing on the diagonal extraction (i.e. on a 5x5 board and combine left to right and right to left diagonal extraction logic);
