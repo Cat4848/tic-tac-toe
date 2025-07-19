@@ -3,6 +3,7 @@ import { SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
+import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
 
 const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>([
@@ -15,6 +16,8 @@ const Game = () => {
 
   useEffect(() => {
     const isWinning = isWinner();
+    console.log("board", board);
+    console.log("isWinning", isWinning);
   }, [moveNo]);
 
   const isWinner = () => {
@@ -23,6 +26,8 @@ const Game = () => {
     const flippedBoard = flipBoard(board);
     const isColumnsWinner = isWinnerOnRows(flippedBoard);
     if (isColumnsWinner) return true;
+    const isDiagWinner = isWinnerOnDiag(board);
+    if (isDiagWinner) return true;
     return false;
   };
 
