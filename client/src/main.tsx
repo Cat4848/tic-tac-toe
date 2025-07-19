@@ -11,37 +11,39 @@ export const Main = () => {
   const [moveNo, setMoveNo] = useState(0);
   const isXNext = moveNo % 2 === 0;
 
+  const handleClick = (rowNo: number, squareNo: number) => {
+    setBoard((board) => {
+      return board.map((row, k) => {
+        return row.map((square, l) => {
+          if (rowNo === k && squareNo === l && !square) {
+            if (isXNext) {
+              setMoveNo(moveNo + 1);
+              return "X";
+            } else {
+              setMoveNo(moveNo + 1);
+              return "O";
+            }
+          } else {
+            return square;
+          }
+        });
+      });
+    });
+  };
+  
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
       <div className="flex flex-col gap-1">
         {board.map((row, i) => (
           <div key={uuid()} className="flex gap-1">
-            {row.map((column, j) => (
+            {row.map((square, j) => (
               <div
                 key={uuid()}
                 className="border-2 border-gray-900 w-10 h-10 cursor-pointer items-center justify-center text-2xl font-bold flex"
-                onClick={() =>
-                  setBoard((board) => {
-                    return board.map((column, k) => {
-                      return column.map((row, l) => {
-                        if (i === k && j === l && !row) {
-                          if (isXNext) {
-                            setMoveNo(moveNo + 1);
-                            return "X";
-                          } else {
-                            setMoveNo(moveNo + 1);
-                            return "O";
-                          }
-                        } else {
-                          return row;
-                        }
-                      });
-                    });
-                  })
-                }
+                onClick={() => handleClick(i, j)}
               >
-                {column}
+                {square}
               </div>
             ))}
           </div>
