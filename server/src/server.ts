@@ -1,6 +1,5 @@
 import express from "express";
 import session from "express-session";
-import rootLayout from "./lib/layouts/rootLayout";
 import PlayersTable from "./services/PlayersTable/PlayersTable";
 import db from "./databases/MySqlDatabase";
 
@@ -20,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send(rootLayout("/css/index.css", "/js/index.js"));
+  res.sendFile(__dirname + "/public/dist/index.html");
 });
 
 app.get("/players", async (req, res) => {

@@ -1,4 +1,4 @@
 node_modules
 .env
 coverage
-/server/src/public/js
+/server/src/public/dist
