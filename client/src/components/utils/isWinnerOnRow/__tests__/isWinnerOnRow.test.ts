@@ -1,5 +1,5 @@
-import { isWinnerOnRow } from "..";
-import { SquareValue } from "../../../lib/types";
+import isWinnerOnRow from "../isWinnerOnRow";
+import { SquareValue } from "../../../../lib/types";
 
 test("if it validates correctly a winning O row", () => {
   expect.assertions(1);

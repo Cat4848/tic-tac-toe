@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { SquareValue } from "../lib/types";
 import { v4 as uuid } from "uuid";
-import { isWinnerOnRow } from "./utils";
+import isWinnerOnRow from "./utils/isWinnerOnRow/isWinnerOnRow";
 
 const Game = () => {
   const [board, setBoard] = useState<SquareValue[][]>([
