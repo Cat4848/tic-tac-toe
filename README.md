@@ -51,14 +51,14 @@ Simplification for the task:
 - `touch server/.env`
 - add the following 2 environmental variables:
 
-``` plaintext
+```plaintext
 DB_URL=mysql://[your-user-name]:[your-password]@localhost:3306/tic_tac_toe_game
 SESSION_SECRET=4b0d432e400f09573de6c96b916ac6a3ae0ca6c3cfd83cb370b0152fc54dd845fc233b6381238e0981f1df97d189690c6dbc0afad59e5c46ed575cc64bf009dc
 ```
 
 - paste the following SQL code into your **Database Client** of choice
 
-``` sql 
+```sql
 CREATE DATABASE IF NOT EXISTS tic_tac_toe_game;
 USE tic_tac_toe_game;
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS players (
 );
 
 INSERT INTO players (name) VALUES ('Nick');
-INSERT INTO players (name) VALUES ('Catalin'); 
+INSERT INTO players (name) VALUES ('Catalin');
 ```
 
 - `cd client && npm i`
@@ -81,29 +81,31 @@ INSERT INTO players (name) VALUES ('Catalin');
 - [start-app](http://localhost:4000/) in your browser
 - enjoy playing 😀
 
+## Testing the application
+
+I built test for both frontend and backend
+
+- run frontend tests: from the **client** directory run `npm run test`;
+- run backend test: from the **server** directory run `npm run test`.
+
 ## Things that I would do if I had more time
 
 - players' option to add their own name;
-- before a new game starts the option for the players to chose if they want to use X or O;
-- players to chose which one begins first on a new game
-- a more sophisticated way to keep track of who won; at the moment when a player wins, I use a ternary operator to establish the winner;
-- now we only have 2 players: Nick and Catalin; if we would have more players in the database, I will ask the players to select who they are from the list of all players. When I know who will play, I create an array with just those 2 players and use the same `moveNo % 2` logic to circulate between the players's turns;
+- before a new game starts the option for the players to chose if they want to use **X** or **O**;
+- players to chose which one begins first on a new game;
+- now we only have 2 players: **Nick** and **Catalin**; if we would have more players in the database, I will ask the players to select who they are from the list of all players. When I know who will play, I create an array with just those 2 players and use the same `moveNo % 2` logic to circulate between the players's turns.
 
 ### Testing
 
 - mock the `PlayersTable` service so that I won't interact with the database directly;
+- more testing on the diagonal extraction (i.e. on a 5x5 board and combine left to right and right to left diagonal extraction logic).
 
 ### Bugs
 
-- after a win, there are 1.5 seconds until time delay until the board gets reinitialized. If you fill the board on two side-by-side rows or columns, one will win and the other one will be one move behind from winning. If you click on the remaining square, both players will win.
-
-- more testing on the diagonal extraction (i.e. on a 5x5 board and combine left to right and right to left diagonal extraction logic);
+- after a player wins, there's a short 1.5-second delay before the board resets. If both players are about to win at the same time—like filling two rows or columns side by side—only one will be recognized first. But if you manage to click the last square in that small window of time, both players can win together!
 
 ### Development
 
 - a shared types package between frontend and backend to enhance DRY code;
-- loading state for async operations like fetch users or post user's score;
-
-## Things to write about in the README.md file
-
-- that there are tests and how to run them
+- loading UI spinner for async operations like fetch users or post user's score;
+- right now, every time someone clicks on a square to place an **X** or **O**, I check if there's a winner. But this could be improved! Since it's impossible for anyone to win before making at least `boardSize - 1` moves, I could wait until then to start checking. That way, I avoid calling the more expensive `isWinner` function when there's no chance of a win yet.

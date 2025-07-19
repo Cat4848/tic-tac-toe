@@ -12,7 +12,7 @@
   "scripts": {
     "start": "ts-node src/server.ts",
     "dev": "nodemon src/server.ts",
-    "test": "jest --coverage --detectOpenHandles",
+    "test": "jest",
     "test:changed": "jest -o --detectOpenHandles",
     "test:watch": "jest --watch --coverage --detectOpenHandles"
   },
