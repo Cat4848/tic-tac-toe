@@ -29,6 +29,19 @@ test("if is extracts the right to left diagonal correctly on a 3x3 board", () =>
   expect(extractedDiag).toStrictEqual(manualDiag);
 });
 
+test("if is winner on losing 5x5 board", () => {
+  expect.assertions(1);
+  const board: SquareValue[][] = [
+    ["X", "X", "O", "X", "X"],
+    ["X", "O", "X", "X", "O"],
+    ["O", "X", "X", "X", "O"],
+    ["O", "X", "O", "O", "X"],
+    ["O", "X", "O", "X", "O"]
+  ];
+  const isWinner = isWinnerOnDiag(board);
+  expect(isWinner).toBe(false);
+});
+
 test("if is winner on diagonal on a winning 3x3 board", () => {
   expect.assertions(1);
   const board: SquareValue[][] = [
