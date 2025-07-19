@@ -67,15 +67,15 @@ const Game = () => {
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
-      <div className="flex flex-col gap-1">
-        <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
+      <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
+      <div className="flex flex-col gap-1 mt-2">
         {isBoardSizeSelected &&
           board.map((row, i) => (
             <div key={uuid()} className="flex gap-1">
               {row.map((square, j) => (
                 <div
                   key={uuid()}
-                  className="border-2 border-gray-900 w-10 h-10 cursor-pointer items-center justify-center text-2xl font-bold flex"
+                  className="border-2 border-gray-900 w-10 h-10 cursor-pointer items-center justify-center text-2xl font-bold flex shadow-md shadow-indigo-200"
                   onClick={() => handleClick(i, j)}
                 >
                   {square}

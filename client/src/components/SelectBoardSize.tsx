@@ -8,7 +8,10 @@ const SelectBoardSize = ({ onSelectBoardSize }: Props) => {
   const availableSizes = Array(17 - 3).fill(undefined);
 
   return (
-    <select onChange={(e) => onSelectBoardSize(e.target.value)}>
+    <select
+      className="p-3 border-2 rounded-md border-indigo-600"
+      onChange={(e) => onSelectBoardSize(e.target.value)}
+    >
       {availableSizes.map((_, i) => {
         if (i === 0) {
           return <option key={uuid()}>Select Board Size</option>;
