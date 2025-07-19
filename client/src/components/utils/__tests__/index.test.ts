@@ -35,3 +35,10 @@ test("if it validates correctly a losing row 3", () => {
   const isWinner = isRowWinner(validValues);
   expect(isWinner).toBe(false);
 });
+
+test("if it validates correctly invalid values", () => {
+  expect.assertions(1);
+  const invalidValues: SquareValue[] = [undefined, undefined, undefined];
+  const isWinner = isRowWinner(invalidValues);
+  expect(isWinner).toBe(false);
+});
