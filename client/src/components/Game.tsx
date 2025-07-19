@@ -5,12 +5,12 @@ import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
 import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
 import { toast } from "react-toastify";
+import { buildBoard } from "./utils/general/general";
+import SelectBoardSize from "./SelectBoardSize";
 
 const Game = () => {
   const [boardSize, setBoardSize] = useState(3);
-  const buildBoard = () => {
-    return Array.from({length: 3})
-  }
+
   const [board, setBoard] = useState<SquareValue[][]>([
     [undefined, undefined, undefined],
     [undefined, undefined, undefined],
@@ -69,7 +69,8 @@ const Game = () => {
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
       <div className="flex flex-col gap-1">
-        {board.map((row, i) => (
+        <SelectBoardSize />
+        {/* {board.map((row, i) => (
           <div key={uuid()} className="flex gap-1">
             {row.map((square, j) => (
               <div
@@ -81,7 +82,7 @@ const Game = () => {
               </div>
             ))}
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );
