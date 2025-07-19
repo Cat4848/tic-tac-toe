@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Player } from "../lib/types";
+import { Player } from "../types";
 import { toast } from "react-toastify";
 
 export const usePlayers = (url: string) => {

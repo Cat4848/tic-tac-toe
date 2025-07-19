@@ -1,5 +1,5 @@
 import { deepCopy } from "../general/general";
-import { SquareValue } from "../../../lib/types";
+import { SquareValue } from "../../../types";
 
 const isWinnerOnRow = (row: SquareValue[]) => {
   const deepRow = deepCopy(row);

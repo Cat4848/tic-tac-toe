@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Player, SquareValue } from "../lib/types";
-import { v4 as uuid } from "uuid";
+import { Player, SquareValue } from "../types";
 import isWinnerOnRows from "./utils/isWinnerOnRows/isWinnerOnRows";
 import flipBoard from "./utils/flipBoard/flipBoard";
 import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
@@ -8,6 +7,8 @@ import { toast } from "react-toastify";
 import { buildBoard } from "./utils/general/general";
 import SelectBoardSize from "./SelectBoardSize";
 import { usePlayers } from "../hooks/usePlayers";
+import ScoreBoard from "./ScoreBoard";
+import Board from "./Board";
 
 const Game = () => {
   const fetchAllPlayersUrl = "/players";
@@ -18,11 +19,11 @@ const Game = () => {
   const [moveNo, setMoveNo] = useState(0);
   const playerIndex = moveNo % 2;
   const isXNext = playerIndex === 0;
-  const player = players[playerIndex];
+  const activePlayer = players[playerIndex];
 
   useEffect(() => {
-    const itWon = isWinner();
-    if (itWon) {
+    const playerWon = isWinner();
+    if (playerWon) {
       const winningPlayer = players[(moveNo - 1) % 2];
       editScore(winningPlayer);
       updatePlayers(winningPlayer);
@@ -32,6 +33,17 @@ const Game = () => {
       }, 1500);
     }
   }, [moveNo]);
+
+  const isWinner = () => {
+    const isRowsWinner = isWinnerOnRows(board);
+    if (isRowsWinner) return true;
+    const flippedBoard = flipBoard(board);
+    const isColumnsWinner = isWinnerOnRows(flippedBoard);
+    if (isColumnsWinner) return true;
+    const isDiagWinner = isWinnerOnDiag(board);
+    if (isDiagWinner) return true;
+    return false;
+  };
 
   const editScore = async (player: Player) => {
     try {
@@ -73,15 +85,11 @@ const Game = () => {
     setPlayers(newPlayers);
   };
 
-  const isWinner = () => {
-    const isRowsWinner = isWinnerOnRows(board);
-    if (isRowsWinner) return true;
-    const flippedBoard = flipBoard(board);
-    const isColumnsWinner = isWinnerOnRows(flippedBoard);
-    if (isColumnsWinner) return true;
-    const isDiagWinner = isWinnerOnDiag(board);
-    if (isDiagWinner) return true;
-    return false;
+  const handleSelectBoardSize = (size: string) => {
+    const sizeNo = Number(size);
+    setBoardSize(sizeNo);
+    setBoard(buildBoard(sizeNo));
+    setIsBoardSizeSelected(true);
   };
 
   const handleClick = (rowNo: number, squareNo: number) => {
@@ -105,38 +113,20 @@ const Game = () => {
     });
   };
 
-  const handleSelectBoardSize = (size: string) => {
-    const sizeNo = Number(size);
-    setBoardSize(sizeNo);
-    setBoard(buildBoard(sizeNo));
-    setIsBoardSizeSelected(true);
-  };
-
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
       <div className="flex mt-10 items-center justify-evenly w-full gap-10">
-        <div>Score Board</div>
+        <ScoreBoard players={players} />
         <SelectBoardSize onSelectBoardSize={handleSelectBoardSize} />
       </div>
       {isBoardSizeSelected && (
-        <div className="font-bold text-2xl">{`It's ${player.name}'s turn 🕣`}</div>
+        <div className="font-bold text-2xl">{`It's ${activePlayer.name}'s turn 🕣`}</div>
       )}
       <div className="flex flex-col gap-1 mt-2">
-        {isBoardSizeSelected &&
-          board.map((row, i) => (
-            <div key={uuid()} className="flex gap-1">
-              {row.map((square, j) => (
-                <div
-                  key={uuid()}
-                  className="border-2 border-gray-900 w-10 h-10 cursor-pointer items-center justify-center text-2xl font-bold flex shadow-md shadow-indigo-200"
-                  onClick={() => handleClick(i, j)}
-                >
-                  {square}
-                </div>
-              ))}
-            </div>
-          ))}
+        {isBoardSizeSelected && (
+          <Board board={board} handleClick={handleClick} />
+        )}
       </div>
     </div>
   );

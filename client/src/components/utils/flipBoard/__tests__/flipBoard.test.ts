@@ -1,5 +1,5 @@
 import flipBoard from "../flipBoard";
-import { SquareValue } from "../../../../lib/types";
+import { SquareValue } from "../../../../types";
 import isWinnerOnRows from "../../isWinnerOnRows/isWinnerOnRows";
 
 test("if flips board correctly", () => {

@@ -3,7 +3,7 @@ import {
   getDiagRightToLeft,
   isWinnerOnDiag
 } from "../isWinnerOnDiag";
-import { SquareValue } from "../../../../lib/types";
+import { SquareValue } from "../../../../types";
 
 test("if is extracts the left to right diagonal correctly on a 3x3 board", () => {
   expect.assertions(1);
