@@ -7,6 +7,7 @@ import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
 import { toast } from "react-toastify";
 import { buildBoard } from "./utils/general/general";
 import SelectBoardSize from "./SelectBoardSize";
+import { usePlayers } from "../hooks/usePlayers";
 
 const Game = () => {
   const [isBoardSizeSelected, setIsBoardSizeSelected] = useState(false);
@@ -15,6 +16,9 @@ const Game = () => {
   const [moveNo, setMoveNo] = useState(0);
   const isXNext = moveNo % 2 === 0;
   const player = `${isXNext ? "Nick" : "Catalin"}`;
+  const fetchAllPlayersUrl = "/players";
+  const players = usePlayers(fetchAllPlayersUrl);
+  console.log("players", players);
 
   useEffect(() => {
     const itWon = isWinner();

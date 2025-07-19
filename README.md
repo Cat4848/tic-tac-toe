@@ -61,6 +61,11 @@ Simplification for the task:
 
 - more testing on the diagonal extraction (i.e. on a 5x5 board and combine left to right and right to left diagonal extraction logic);
 
+## Development
+
+- a shared types package between frontend and backend to enhance DRY code;
+- loading state for async operations like fetch users or post user's score;
+
 ## Things to write about in the README.md file
 
 - that there are tests and how to run them
