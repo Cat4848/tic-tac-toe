@@ -7,6 +7,10 @@ import { isWinnerOnDiag } from "./utils/isWinnerOnDiag/isWinnerOnDiag";
 import { toast } from "react-toastify";
 
 const Game = () => {
+  const [boardSize, setBoardSize] = useState(3);
+  const buildBoard = () => {
+    return Array.from({length: 3})
+  }
   const [board, setBoard] = useState<SquareValue[][]>([
     [undefined, undefined, undefined],
     [undefined, undefined, undefined],
