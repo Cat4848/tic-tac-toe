@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { XorO } from "./types";
+import { SquareValue } from "./types";
 import { v4 as uuid } from "uuid";
 
 export const Main = () => {
-  const [board, setBoard] = useState<(XorO | undefined)[][]>([
+  const [board, setBoard] = useState<SquareValue[][]>([
     [undefined, undefined, undefined],
     [undefined, undefined, undefined],
     [undefined, undefined, undefined]
@@ -13,16 +13,17 @@ export const Main = () => {
 
   const handleClick = (rowNo: number, squareNo: number) => {
     setBoard((board) => {
-      return board.map((row, k) => {
-        return row.map((square, l) => {
-          if (rowNo === k && squareNo === l && !square) {
+      return board.map((row, i) => {
+        return row.map((square, j) => {
+          if (rowNo === i && squareNo === j && !square) {
+            let targetSquare: SquareValue = undefined;
             if (isXNext) {
-              setMoveNo(moveNo + 1);
-              return "X";
+              targetSquare = "X";
             } else {
-              setMoveNo(moveNo + 1);
-              return "O";
+              targetSquare = "O";
             }
+            setMoveNo(moveNo + 1);
+            return targetSquare;
           } else {
             return square;
           }
@@ -30,7 +31,7 @@ export const Main = () => {
       });
     });
   };
-  
+
   return (
     <div className="flex flex-col mt-10 items-center gap-10">
       <div className="font-bold text-2xl">Tic Tac Toe</div>
