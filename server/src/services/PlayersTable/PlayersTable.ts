@@ -1,4 +1,4 @@
-import { Database, Player } from "../../lib/types";
+import { Database } from "../../lib/types";
 
 export default class PlayersTable {
   private db: Database;
@@ -13,9 +13,9 @@ export default class PlayersTable {
     return result;
   };
 
-  editScore = async (player: Player, score: number) => {
+  editScore = async (playerId: number, score: number) => {
     const sql = `UPDATE players SET score = ? WHERE player_id = ?;`;
-    const result = await this.db.execute(sql, [score, player.player_id]);
+    const result = await this.db.execute(sql, [score, playerId]);
     return result;
   };
 }
